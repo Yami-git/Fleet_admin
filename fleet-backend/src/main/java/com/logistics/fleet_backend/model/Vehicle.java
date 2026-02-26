@@ -2,6 +2,7 @@ package com.logistics.fleet_backend.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import org.locationtech.jts.geom.Point;
 
 @Entity
 public class Vehicle {
@@ -9,6 +10,7 @@ public class Vehicle {
     private String truckId;
     private double latitude;
     private double longitude;
+    private Point location; // PostGIS spatial point
 
     public Vehicle(){}
     public Vehicle(String truckId, double latitude, double longitude){
@@ -39,5 +41,13 @@ public class Vehicle {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public Point getLocation() {
+        return location;
+    }
+
+    public void setLocation(Point location) {
+        this.location = location;
     }
 }
