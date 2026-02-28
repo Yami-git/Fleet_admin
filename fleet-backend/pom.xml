@@ -53,6 +53,17 @@
 			<artifactId>jts-core</artifactId>
 			<version>1.18.2</version>
 		</dependency>
+		<dependencies>
+    <!-- …existing dependencies… -->
+
+    <dependency>
+        <groupId>org.springframework.kafka</groupId>
+        <artifactId>spring-kafka</artifactId>
+        <!-- if you’re using Spring Boot, you can omit <version>; the
+             Boot parent will manage it -->
+        <version>2.8.0</version>
+    </dependency>
+</dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

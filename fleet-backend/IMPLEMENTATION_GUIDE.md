@@ -63,8 +63,11 @@ public class RedisConfig {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory);
         template.setKeySerializer(new StringRedisSerializer());
+
         template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+
         template.setHashKeySerializer(new StringRedisSerializer());
+
         template.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
         return template;
     }
@@ -87,7 +90,9 @@ import java.util.concurrent.TimeUnit;
 public class VehicleCacheService {
 
     private final RedisTemplate<String, Object> redisTemplate;
+
     private static final String VEHICLE_KEY_PREFIX = "vehicle:";
+
     private static final long CACHE_TTL_MINUTES = 30;
 
     public VehicleCacheService(RedisTemplate<String, Object> redisTemplate) {
@@ -127,7 +132,9 @@ java
 public class VehicleController {
     
     private final VehicleRepository repository;
+
     private final VehicleCacheService cacheService;
+    
     private final SimpMessagingTemplate messagingTemplate;
 
     public VehicleController(VehicleRepository repository, 

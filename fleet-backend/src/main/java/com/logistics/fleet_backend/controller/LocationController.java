@@ -20,6 +20,10 @@ public class LocationController {
         this.vehicleRepository = vehicleRepository;
     }
 
+    /**
+     * Get all trucks within X meters of a location
+     */
+
     @GetMapping
     public List<Location> getAllLocations() {
         return locationRepository.findAll();
@@ -34,12 +38,12 @@ public class LocationController {
      * Find all vehicles within radius of a location
      * Usage: GET /api/locations/{id}/vehicles-nearby?radius=5000 (5km)
      */
-    @GetMapping("/{id}/vehicles-nearby")
+    @GetMapping("/{locationId}/vehicles-nearby")
     public List<Vehicle> getVehiclesNearLocation(
-            @PathVariable String id,
+            @PathVariable String locationId,
             @RequestParam(defaultValue = "5000") double radius) {
         
-        Location location = locationRepository.findById(id).orElse(null);
+        Location location = locationRepository.findById(locationId).orElse(null);
         if (location == null) {
             return List.of();
         }
