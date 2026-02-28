@@ -2,6 +2,7 @@ package com.logistics.fleet_backend.consumer;
 import com.logistics.fleet_backend.model.Vehicle;
 import com.logistics.fleet_backend.service.AnomalyDetectionService;
 import org.springframework.kafka.annotation.KafkaListener;
+
 import org.springframework.stereotype.Service;
 
 @Service

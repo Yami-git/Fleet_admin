@@ -5,6 +5,7 @@ import com.logistics.fleet_backend.model.RouteDeviation;
 import com.logistics.fleet_backend.repository.VehicleRepository;
 import com.logistics.fleet_backend.service.AnomalyDetectionService;
 import com.logistics.fleet_backend.service.VehicleCacheService;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -20,13 +21,13 @@ public class VehicleController{
     private final VehicleCacheService cacheService;
     private final SimpMessagingTemplate messagingTemplate;
     private final AnomalyDetectionService anomalyDetectionService;
-    private final KafkaTemplate<String, Vehicle> kafkaTemplate;
+    private final KafkaTemplate<String, Object> kafkaTemplate;
     private static final String TOPIC = "vehicle-updates";
     
     public VehicleController(VehicleRepository repository, 
                            SimpMessagingTemplate messagingTemplate,
                            AnomalyDetectionService anomalyDetectionService, VehicleCacheService cacheService,
-                           KafkaTemplate<String, Vehicle> kafkaTemplate) {
+                           KafkaTemplate<String, Object> kafkaTemplate) {
         System.out.println("--------------------------------------");
         System.out.println("🚨 VEHICLE CONTROLLER IS LOADED 🚨");
         System.out.println("--------------------------------------");
