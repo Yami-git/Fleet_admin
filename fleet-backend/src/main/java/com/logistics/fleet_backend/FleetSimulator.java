@@ -9,7 +9,7 @@ import java.util.concurrent.*;
 
 public class FleetSimulator {
 
-    private static final int NUM_TRUCKS = 10;
+    private static final int NUM_TRUCKS = 7;
     private static final int THREAD_POOL_SIZE = 10;
     private static final String API_URL = "http://localhost:8080/api/vehicles";
 

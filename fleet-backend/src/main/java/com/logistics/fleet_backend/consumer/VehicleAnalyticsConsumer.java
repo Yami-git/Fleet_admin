@@ -1,16 +1,21 @@
 package com.logistics.fleet_backend.consumer;
+
 import com.logistics.fleet_backend.model.Vehicle;
 import com.logistics.fleet_backend.service.AnomalyDetectionService;
 import org.springframework.kafka.annotation.KafkaListener;
-
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
 public class VehicleAnalyticsConsumer {
     private final AnomalyDetectionService anomalyDetectionService;
+    private final SimpMessagingTemplate messagingTemplate; //The megaphone
 
-    public VehicleAnalyticsConsumer(AnomalyDetectionService anomalyDetectionService) {
+
+    //Inject the messaging template via the constructor
+    public VehicleAnalyticsConsumer(AnomalyDetectionService anomalyDetectionService, SimpMessagingTemplate messagingTemplate) {
         this.anomalyDetectionService = anomalyDetectionService;
+        this.messagingTemplate=messagingTemplate;
     }
 
     @KafkaListener(topics = "vehicle-updates", groupId = "fleet-group")
@@ -24,6 +29,8 @@ public class VehicleAnalyticsConsumer {
         // - Speed calculation
         // - Route progress
         // - ETA predictions
+        //2. BROADCAST TO REACT MAP!
+        messagingTemplate.convertAndSend("/topic/updates", vehicle);
         
     }
 }
